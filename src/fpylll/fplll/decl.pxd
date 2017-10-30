@@ -15,7 +15,7 @@ IF HAVE_QD:
 
 from fplll cimport dpe_t
 from fplll cimport Z_NR, FP_NR
-from fplll cimport ZZ_mat, MatGSO, LLLReduction, BKZAutoAbort, BKZReduction, Enumeration
+from fplll cimport ZZ_mat, MatGSO, MatGSOGram, LLLReduction, BKZAutoAbort, BKZReduction, Enumeration
 from fplll cimport GaussSieve
 from fplll cimport FastEvaluator, FastErrorBoundedEvaluator, Pruner
 
@@ -55,6 +55,33 @@ ELSE:
         gso_long_ld    =  128
         gso_long_dpe   =  256
         gso_long_mpfr  = 2048
+
+## copypaster for gso_gram
+IF HAVE_QD:
+    ctypedef enum fplll_gso_gram_type_t:
+        gso_gram_mpz_d      =    1
+        gso_gram_mpz_ld     =    2
+        gso_gram_mpz_dpe    =    4
+        gso_gram_mpz_dd     =    8
+        gso_gram_mpz_qd     =   16
+        gso_gram_mpz_mpfr   =   32
+        gso_gram_long_d     =   64
+        gso_gram_long_ld    =  128
+        gso_gram_long_dpe   =  256
+        gso_gram_long_dd    =  512
+        gso_gram_long_qd    = 1024
+        gso_gram_long_mpfr  = 2048
+
+ELSE:
+    ctypedef enum fplll_gso_gram_type_t:
+        gso_gram_mpz_d      =    1
+        gso_gram_mpz_ld     =    2
+        gso_gram_mpz_dpe    =    4
+        gso_gram_mpz_mpfr   =   32
+        gso_gram_long_d     =   64
+        gso_gram_long_ld    =  128
+        gso_gram_long_dpe   =  256
+        gso_gram_long_mpfr  = 2048
 
 IF HAVE_QD:
     ctypedef enum fplll_nr_type_t:
@@ -124,6 +151,32 @@ IF HAVE_LONG_DOUBLE:
             MatGSO[Z_NR[long], FP_NR[ld_t]] *long_ld
             MatGSO[Z_NR[long], FP_NR[dpe_t]] *long_dpe
             MatGSO[Z_NR[long], FP_NR[mpfr_t]] *long_mpfr
+
+    ## copypaster for gso_gram
+    IF HAVE_QD:
+        ctypedef union mat_gso_gram_core_t:
+            MatGSOGram[Z_NR[mpz_t], FP_NR[d_t]] *mpz_d
+            MatGSOGram[Z_NR[mpz_t], FP_NR[ld_t]] *mpz_ld
+            MatGSOGram[Z_NR[mpz_t], FP_NR[dpe_t]] *mpz_dpe
+            MatGSOGram[Z_NR[mpz_t], FP_NR[dd_t]] *mpz_dd
+            MatGSOGram[Z_NR[mpz_t], FP_NR[qd_t]] *mpz_qd
+            MatGSOGram[Z_NR[mpz_t], FP_NR[mpfr_t]] *mpz_mpfr
+            MatGSOGram[Z_NR[long], FP_NR[d_t]] *long_d
+            MatGSOGram[Z_NR[long], FP_NR[ld_t]] *long_ld
+            MatGSOGram[Z_NR[long], FP_NR[dpe_t]] *long_dpe
+            MatGSOGram[Z_NR[long], FP_NR[dd_t]] *long_dd
+            MatGSOGram[Z_NR[long], FP_NR[qd_t]] *long_qd
+            MatGSOGram[Z_NR[long], FP_NR[mpfr_t]] *long_mpfr
+    ELSE:
+        ctypedef union mat_gso_gram_core_t:
+            MatGSOGram[Z_NR[mpz_t], FP_NR[d_t]] *mpz_d
+            MatGSOGram[Z_NR[mpz_t], FP_NR[ld_t]] *mpz_ld
+            MatGSOGram[Z_NR[mpz_t], FP_NR[dpe_t]] *mpz_dpe
+            MatGSOGram[Z_NR[mpz_t], FP_NR[mpfr_t]] *mpz_mpfr
+            MatGSOGram[Z_NR[long], FP_NR[d_t]] *long_d
+            MatGSOGram[Z_NR[long], FP_NR[ld_t]] *long_ld
+            MatGSOGram[Z_NR[long], FP_NR[dpe_t]] *long_dpe
+            MatGSOGram[Z_NR[long], FP_NR[mpfr_t]] *long_mpfr
 
     IF HAVE_QD:
         ctypedef union lll_reduction_core_t:
@@ -305,6 +358,28 @@ ELSE:
             MatGSO[Z_NR[long], FP_NR[d_t]] *long_d
             MatGSO[Z_NR[long], FP_NR[dpe_t]] *long_dpe
             MatGSO[Z_NR[long], FP_NR[mpfr_t]] *long_mpfr
+
+    # Copy paster for matGSO Gram
+    IF HAVE_QD:
+        ctypedef union mat_gso_gram_core_t:
+            MatGSOGram[Z_NR[mpz_t], FP_NR[d_t]] *mpz_d
+            MatGSOGram[Z_NR[mpz_t], FP_NR[dpe_t]] *mpz_dpe
+            MatGSOGram[Z_NR[mpz_t], FP_NR[dd_t]] *mpz_dd
+            MatGSOGram[Z_NR[mpz_t], FP_NR[qd_t]] *mpz_qd
+            MatGSOGram[Z_NR[mpz_t], FP_NR[mpfr_t]] *mpz_mpfr
+            MatGSOGram[Z_NR[long], FP_NR[d_t]] *long_d
+            MatGSOGram[Z_NR[long], FP_NR[dpe_t]] *long_dpe
+            MatGSOGram[Z_NR[long], FP_NR[dd_t]] *long_dd
+            MatGSOGram[Z_NR[long], FP_NR[qd_t]] *long_qd
+            MatGSOGram[Z_NR[long], FP_NR[mpfr_t]] *long_mpfr
+    ELSE:
+        ctypedef union mat_gso_gram_core_t:
+            MatGSOGram[Z_NR[mpz_t], FP_NR[d_t]] *mpz_d
+            MatGSOGram[Z_NR[mpz_t], FP_NR[dpe_t]] *mpz_dpe
+            MatGSOGram[Z_NR[mpz_t], FP_NR[mpfr_t]] *mpz_mpfr
+            MatGSOGram[Z_NR[long], FP_NR[d_t]] *long_d
+            MatGSOGram[Z_NR[long], FP_NR[dpe_t]] *long_dpe
+            MatGSOGram[Z_NR[long], FP_NR[mpfr_t]] *long_mpfr
 
     IF HAVE_QD:
         ctypedef union lll_reduction_core_t:

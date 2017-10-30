@@ -451,6 +451,77 @@ cdef extern from "fplll/gso.h" namespace "fplll":
         const int row_op_force_long
 
 
+# Gram Schmidt Orthogonalization from Gram matrix
+
+
+cdef extern from "fplll/gso_gram.h" namespace "fplll":
+
+    cdef cppclass MatGSOGram[ZT, FT]:
+        MatGSOGram(Matrix[ZT] B, Matrix[ZT] U, Matrix[ZT] UinvT, int flags)
+
+        int d
+        Matrix[ZT]& b
+        vector[long] row_expo
+        void row_op_begin(int first, int last)
+        void row_op_end(int first, int last)
+        FT& get_gram(FT& f, int i, int j)
+
+        const Matrix[FT]& get_mu_matrix() nogil
+        const FT& get_mu_exp(int i, int j, long& expo) nogil
+        const FT& get_mu_exp(int i, int j) nogil
+        FT& get_mu(FT& f, int i, int j) nogil
+
+        const Matrix[FT]& get_r_matrix() nogil
+        const FT& get_r_exp(int i, int j, long& expo) nogil
+        const FT& get_r_exp(int i, int j) nogil
+        FT& get_r(FT& f, int i, int j) nogil
+
+        long get_max_mu_exp(int i, int nColumns) nogil
+
+        int update_gso_row(int i, int lastJ) nogil
+        int update_gso_row(int i) nogil
+        int update_gso() nogil
+
+        void discover_all_rows() nogil
+        void set_r(int i, int j, FT& f) nogil
+        void move_row(int oldR, int newR) nogil
+        void row_swap(int row1, int row2)
+
+        void row_addmul(int i, int j, const FT& x) nogil
+        void row_addmul_we(int i, int j, const FT& x, long expoAdd) nogil
+
+        void lock_cols() nogil
+        void unlock_cols() nogil
+
+        void create_row() nogil
+        void create_rows(int nNewRows) nogil
+
+        void remove_last_row() nogil
+        void remove_last_rows(int nRemovedRows) nogil
+
+        void apply_transform(const Matrix[FT]& transform, int srcBase, int targetBase) nogil
+        void apply_transform(const Matrix[FT]& transform, int srcBase) nogil
+
+        void dump_mu_d(double* mu, int offset, int block_size) nogil
+        void dump_mu_d(vector[double] mu, int offset, int block_size) nogil
+
+        void dump_r_d(double* r, int offset, int block_size) nogil
+        void dump_r_d(vector[double] r, int offset, int block_size) nogil
+
+        double get_current_slope(int start_row, int stop_row) nogil
+        FT get_root_det(int start_row, int stop_row) nogil
+        FT get_log_det(int start_row, int stop_row) nogil
+        FT get_slide_potential(int start_row, int stop_row, int block_size) nogil
+
+        const int enable_int_gram
+        const int enable_row_expo
+        const int enable_transform
+
+        const int enable_inverse_transform
+        const int row_op_force_long
+
+
+
 
 # LLL
 

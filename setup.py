@@ -118,6 +118,7 @@ extensions = [
     Extension("fpylll.gmp.pylong", ["src/fpylll/gmp/pylong.pyx"], **other),
     Extension("fpylll.fplll.integer_matrix", ["src/fpylll/fplll/integer_matrix.pyx"], **fplll),
     Extension("fpylll.fplll.gso", ["src/fpylll/fplll/gso.pyx"], **fplll),
+    Extension("fpylll.fplll.gsogram", ["src/fpylll/fplll/gsogram.pyx"], **fplll),
     Extension("fpylll.fplll.lll", ["src/fpylll/fplll/lll.pyx"], **fplll),
     Extension("fpylll.fplll.wrapper", ["src/fpylll/fplll/wrapper.pyx"], **fplll),
     Extension("fpylll.fplll.bkz_param", ["src/fpylll/fplll/bkz_param.pyx"], **fplll),
