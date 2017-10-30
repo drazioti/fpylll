@@ -456,6 +456,12 @@ cdef extern from "fplll/gso.h" namespace "fplll":
 
 cdef extern from "fplll/gso_gram.h" namespace "fplll":
 
+    cdef enum MatGSOInterfaceFlags:
+        GSO_DEFAULT
+        GSO_INT_GRAM
+        GSO_ROW_EXPO
+        GSO_OP_FORCE_LONG
+
     cdef cppclass MatGSOGram[ZT, FT]:
         MatGSOGram(Matrix[ZT] B, Matrix[ZT] U, Matrix[ZT] UinvT, int flags)
 
