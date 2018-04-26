@@ -1,4 +1,4 @@
-.. _example-eunmeration-custom-pruning:
+.. _example-custom-pruning:
 
 .. role:: math(raw)
    :format: html latex
@@ -10,10 +10,10 @@
 
 :orphan:
 
-Enumeration with our custom  Pruning
-=====================================
+Linear Pruning
+==============
 
-bla bla
+If we want to use pruning we can use the default pruning of fplll or to use our custom pruning. For instance, say that for some reason we want to use linear pruning. Then, we shall define the new linear pruning strategy as follows.
 
 ::
 
