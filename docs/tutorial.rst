@@ -191,7 +191,7 @@ Further examples
 
 More specific examples can be found in:
 
-* :doc:`example-gauss-circle-problem`
+* :ref:`example-gauss-circle-problem`
 * :doc:`example-linear-diophantine-equations`
 * :doc:`example-custom-pruning`
 
