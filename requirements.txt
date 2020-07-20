@@ -2,3 +2,5 @@ Cython
 pytest
 cysignals
 flake8
+jupyter
+gmpy2
