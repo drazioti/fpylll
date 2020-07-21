@@ -1,5 +1,5 @@
 jupyterhub
-
+notebook
 #please add the following in ~/.jupyter/jupyter_notebook_config.py 
 # import os
 # c = get_config()
