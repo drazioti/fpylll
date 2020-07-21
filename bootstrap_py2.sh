@@ -46,10 +46,14 @@ cd ..
 pip install Cython
 pip install -r requirements.txt
 pip install -r suggestions.txt
+pip3 install -r suggestions3.txt
+python setup.py clean
 python setup.py clean
 python setup.py build_ext
 python setup.py install
 
-
 echo "Don't forget to activate environment each time:"
 echo " source ./activate"
+echo "For instanlling jupyterhub:"
+echo "pip3 install jupyterhub"
+echo "npm install configurable-http-proxy"
