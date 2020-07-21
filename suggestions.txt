@@ -2,3 +2,10 @@ ipython
 numpy
 Sphinx>=1.6
 matplotlib
+jupyter
+gmpy2
+pycuda
+notebook
+sympy
+scipy
+pandas
