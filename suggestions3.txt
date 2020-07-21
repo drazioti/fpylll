@@ -1,0 +1,8 @@
+jupyterhub
+
+#please add the following in ~/.jupyter/jupyter_notebook_config.py 
+# import os
+# c = get_config()
+# os.environ['LD_LIBRARY_PATH'] = '/path/to/fpylll/fpylll-env-py2/lib'
+# c.Spawner.env.update('LD_LIBRARY_PATH')
+# c.NotebookApp.notebook_dir = u'/your/initial/folder'
